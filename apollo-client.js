@@ -10,7 +10,7 @@ const httpLink = createHttpLink({
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = "YOU_RECEIVED_THIS_PER_EMAIL_REPLACE_ME"
+  const token = process.env.NEXT_PUBLIC_API_KEY
 
   return {
     headers: {
