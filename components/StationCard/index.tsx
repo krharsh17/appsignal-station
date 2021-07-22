@@ -3,18 +3,18 @@ import StationImage from "./StationImage";
 import {
     EMPTY_STRING,
     mapBooleanToYesNo,
-    mapLocationToString,
-    mapMailingAddressToString,
-    mapStationManagementToString,
+    parseLocationToString,
+    parseMailingAddressToString,
+    parseStationManagementToString,
     STATION_LOCATION_TITLE,
     STATION_MAILING_ADDRESS_TITLE,
     STATION_MANAGEMENT_TITLE,
     STATION_PUBLIC_FACILITIES_TITLE,
     STATION_PUBLIC_TRANSPORT_TITLE,
     STATION_WIFI_TITLE
-} from "../Constants";
+} from "../../utils/Constants";
 import {useQuery} from "@apollo/client";
-import {fetchStationQuery} from "../../queries/fetch";
+import {FETCH_STATION_QUERY} from "../../queries/fetch";
 import Loader from "../Loader";
 
 /**
@@ -24,7 +24,7 @@ import Loader from "../Loader";
 const Index = ({primaryEvaId}: StationCardPropTypes) => {
 
     // Fetch the details of the station whose evaId has been provided
-    const {data, error, loading} = useQuery(fetchStationQuery, {variables: {evaId: primaryEvaId}});
+    const {data, error, loading} = useQuery(FETCH_STATION_QUERY, {variables: {evaId: primaryEvaId}});
 
     // While loading, show the Loader component
     if (loading) return <Loader/>
@@ -51,7 +51,7 @@ const Index = ({primaryEvaId}: StationCardPropTypes) => {
                 <tr>
                     <th className="font-medium pr-4 py-1 border-b">{STATION_MANAGEMENT_TITLE}</th>
                     <td className="py-1 border-b" aria-label={"station-management-val"}>
-                        {mapStationManagementToString(stationData.stationManagement)}
+                        {parseStationManagementToString(stationData.stationManagement)}
                     </td>
                 </tr>
 
@@ -59,7 +59,7 @@ const Index = ({primaryEvaId}: StationCardPropTypes) => {
                 <tr>
                     <th className="font-medium pr-4 py-1 border-b">{STATION_MAILING_ADDRESS_TITLE}</th>
                     <td className="py-1 border-b" aria-label={"mailing-address-val"}>
-                        {mapMailingAddressToString(stationData.mailingAddress)}
+                        {parseMailingAddressToString(stationData.mailingAddress)}
                     </td>
                 </tr>
 
@@ -67,7 +67,7 @@ const Index = ({primaryEvaId}: StationCardPropTypes) => {
                 <tr>
                     <th className="font-medium pr-4 py-1 border-b">{STATION_LOCATION_TITLE}</th>
                     <td className="py-1 border-b" aria-label={"location-val"}>
-                        {mapLocationToString(stationData.location)}
+                        {parseLocationToString(stationData.location)}
                     </td>
                 </tr>
 

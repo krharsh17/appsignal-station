@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {placeholderImageURL} from "../Constants";
+import {placeholderImageURL} from "../../utils/Constants";
 
 /**
  * Image component for the station card

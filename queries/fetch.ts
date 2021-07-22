@@ -3,7 +3,7 @@ import {gql} from "@apollo/client";
 /**
  * GraphQL query for fetching a station's details from the API
  */
-export const fetchStationQuery = gql`
+export const FETCH_STATION_QUERY = gql`
     query fetchStation($evaId: Int!) {
         stationWithEvaId(evaId: $evaId) {
             name

@@ -3,7 +3,7 @@ import {SEARCH_STATION_QUERY} from "../queries/search";
 import React, {useEffect, useState} from "react";
 import Loader from "../components/Loader";
 import StationCard from "../components/StationCard";
-import {EMPTY_STRING} from "../components/Constants";
+import {EMPTY_STRING} from "../utils/Constants";
 import {useRouter} from "next/router";
 
 /**

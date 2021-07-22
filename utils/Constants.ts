@@ -33,41 +33,56 @@ export const testStationData: StationData = {
     }
 }
 
-
+/**
+ * Maps a boolean value to "Yes" or "No"
+ * @param val       boolean value
+ */
 export const mapBooleanToYesNo = (val: boolean) => val ? "Yes" : "No"
 
-export const mapStationManagementToString = (data: StationManagement) => {
+/**
+ * Parse the raw station management object from the API response into a formatted string
+ * @param data      raw station management object
+ */
+export const parseStationManagementToString = (data: StationManagement) => {
     let result = EMPTY_STRING
 
     if (data.name)
         result = result.concat(data.name)
 
     if (data.email)
-        result = result.concat(` (${data.email})`)
+        result = result.concat(data.name ? ` (${data.email})` : data.email)
 
     return result
 }
 
-export const mapMailingAddressToString = (data: MailingAddress) => {
+/**
+ * Parses the raw mailing address object from the API response into a formatted string
+ * @param data      raw mailing address object
+ */
+export const parseMailingAddressToString = (data: MailingAddress) => {
     let result = EMPTY_STRING
 
     if (data.street)
         result = result.concat(data.street)
 
     if (data.city)
-        result = result.concat(`, ${data.city}`)
+        result = result.concat(data.street ? `, ${data.city}` : data.city)
 
     if (data.zipcode)
-        result = result.concat(` (${data.zipcode})`)
+        result = result.concat(data.street || data.city ? ` (${data.zipcode})` : data.zipcode)
 
     return result
 }
 
-export const mapLocationToString = (data: Location) => {
+/**
+ * Parses the raw location object from the API response into a formatted string
+ * @param data      raw location object
+ */
+export const parseLocationToString = (data: Location) => {
     let result = EMPTY_STRING
 
-    result = result.concat(`${data.latitude} °${data.latitude > 0 ? 'N' : 'S'}`)
-    result = result.concat(` ${data.longitude} °${data.longitude > 0 ? 'E' : 'W'}`)
+    result = result.concat(`${Math.abs(data.latitude)}°${data.latitude >= 0 ? 'N' : 'S'}`)
+    result = result.concat(` ${Math.abs(data.longitude)}°${data.longitude >= 0 ? 'E' : 'W'}`)
 
     return result
 }
