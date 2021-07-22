@@ -10,6 +10,7 @@ const httpLink = createHttpLink({
 });
 
 const authLink = setContext((_, { headers }) => {
+  // The token is fetched from the environment variables for better security
   const token = process.env.NEXT_PUBLIC_API_KEY
 
   return {
